@@ -1,15 +1,11 @@
 
 var admin = require("firebase-admin");
 
-
-
-var serviceAccount = require("./hair_share_admin.json");
+var serviceAccount = require("./arpon-app-firebase-adminsdk-msu2y-ab66e7b352.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://hairshare-83628.firebaseio.com"
+  databaseURL: "https://arpon-app-default-rtdb.firebaseio.com"
 });
-
-
 
 module.exports.admin = admin
