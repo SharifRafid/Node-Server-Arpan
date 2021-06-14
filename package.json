@@ -1,7 +1,6 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -16,5 +15,15 @@
   },
   "engines": {
     "node": "12.18.4"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niteshdass/NotifiqitionApi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/niteshdass/NotifiqitionApi/issues"
+  },
+  "homepage": "https://github.com/niteshdass/NotifiqitionApi#readme",
+  "description": ""
 }
