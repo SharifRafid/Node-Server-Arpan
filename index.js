@@ -10,13 +10,10 @@ app.use(bodyparser.json())
 
 const port = process.env.PORT || 8000
 
-
-
 const notification_options = {
   priority: "high",
   timeToLive: 60 * 60 * 24
 };
-
 
 app.post('/sent-notification', async (req, res) => {
 
@@ -215,9 +212,6 @@ newPostRef.set(noti);
 
 })
 
-
-
-
 app.get("/getData", async (req, res) => {
   const res1 = await db.collection('timers').add({
     updateTime: '5',
@@ -228,18 +222,14 @@ app.get("/getData", async (req, res) => {
   res.json({"message":"fine"})
 })
 
-
-
 app.get("/", async (req, res) => {
-  
-  res.json({"message":"HEROKU SERVER FOR ARPAN APP - PLEASE AVOID HITTING THIS URL - THANK YOU :D"})
+    res.json({"message":"HEROKU SERVER FOR ARPAN APP - PLEASE AVOID HITTING THIS URL - THANK YOU :D"})
 })
 
 app.listen(port, () => {
   console.log("listening to port" + port)
 
 })
-
 
 app.post('/send-notification', async (req, res) => {
 
@@ -424,7 +414,6 @@ var noti={}
 
 })
 
-
 app.post('/send-popup-notification-to-user', async (req, res) => {
 
   //const id = "jSCZYMamdqeFFMWqm0RhFjxYDA32"
@@ -517,7 +506,6 @@ var noti={}
 
 })
 
-
 app.post('/send-order-status-changed-notification', async (req, res) => {
 
   //const id = "jSCZYMamdqeFFMWqm0RhFjxYDA32"
@@ -604,7 +592,6 @@ var noti={}
     });
 
 })
-
 
 app.post('/send-notification-to-admin-app-about-a-new-order-that-he-recieved', async (req, res) => {
 
@@ -777,5 +764,48 @@ var noti={}
     .catch(error => {
       console.log(error);
     });
+
+})
+
+
+app.post('/delete-firebase-storage-of-a-specific-shop-all-delete-images', async (req, res) => {
+
+  const shop_key = req.body.shop_key
+  const bucket = admin.storage().bucket();
+  await bucket.deleteFiles({
+     prefix: `shops/${shop_key}/`
+  }).then(results => {
+    console.log(results)
+    res.json("SUCCESS")
+    return results;
+  })
+  .catch(error => {
+    res.json("ERROR")
+    console.log(error)
+  });
+  res.json("RECIEVED DELETE REQUEST")
+
+})
+
+
+app.post('/delete-firestore-products-data-from-a-specific-category-from-the-admin-app', async (req, res) => {
+
+  const category_key = req.body.category_key
+  const shop_key = req.body.shop_key
+
+  const productsRef = db.collection("shops_main")
+  .doc(shop_key).collection("products_main_sub_collection")
+  .where("shopCategoryKey","==", category_key);
+
+  let batch = db.batch();
+
+  productsRef
+    .get()
+    .then(snapshot => {
+      snapshot.docs.forEach(doc => {
+      batch.delete(doc.ref);
+    });
+    return batch.commit();
+  })
 
 })

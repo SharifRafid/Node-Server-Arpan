@@ -5,7 +5,8 @@ var serviceAccount = require("./arpon-app-firebase-adminsdk-msu2y-ab66e7b352.jso
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://arpon-app-default-rtdb.firebaseio.com"
+  databaseURL: "https://arpon-app-default-rtdb.firebaseio.com",
+  storageBucket: "gs://arpon-app.appspot.com"
 });
 
 module.exports.admin = admin
