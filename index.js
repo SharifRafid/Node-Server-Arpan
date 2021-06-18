@@ -595,14 +595,12 @@ var noti={}
 
 app.post('/send-notification-to-admin-app-about-a-new-order-that-he-recieved', async (req, res) => {
 
-  //const id = "jSCZYMamdqeFFMWqm0RhFjxYDA32"
   const id = req.body.userId
   const user_id = req.body.userId
   const apititle = req.body.apititle
   const apibody = req.body.apibody
   const orderID = req.body.orderID
   const click_action = req.body.click_action
-  //const user_id = "jSCZYMamdqeFFMWqm0RhFjxYDA32"
   
   let userToken = []
 
@@ -790,6 +788,8 @@ app.post('/delete-firebase-storage-of-a-specific-shop-all-delete-images', async 
 
 app.post('/delete-firestore-products-data-from-a-specific-category-from-the-admin-app', async (req, res) => {
 
+  res.json("API HIT SUCCESS --- NOTE THAT THIS DOES NOT MEAN THAT THE REQUESTED OPERATION IS SUCCESSFULL ---")
+
   const category_key = req.body.category_key
   const shop_key = req.body.shop_key
 
@@ -803,9 +803,23 @@ app.post('/delete-firestore-products-data-from-a-specific-category-from-the-admi
     .get()
     .then(snapshot => {
       snapshot.docs.forEach(doc => {
-      batch.delete(doc.ref);
+        if(doc.get("image1") != ""){
+          deleteImage("shops/"+doc.get("shopKey")+"/"+doc.get("image1"))
+        }
+        batch.delete(doc.ref);
     });
     return batch.commit();
   })
-
 })
+
+function deleteImage(_image_path) {
+  // first delete the image
+  const imageRef = admin.storage().bucket().file(_image_path);
+  imageRef.delete().then(function() {
+    console.log('file deleted');
+    // File deleted successfully
+  }).catch(function(error) {
+    // Uh-oh, an error occurred!
+    console.log(error);
+  });
+}
