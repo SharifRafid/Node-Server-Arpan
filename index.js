@@ -255,8 +255,6 @@ app.post('/send-notification', async (req, res) => {
 
       
 var noti={}
-
-
     if(user_id){
 			   noti = 
         {
@@ -275,11 +273,7 @@ var noti={}
       }
 		
 		console.log("noti",noti)
-	  
-//       var postListRef = admin.database().ref('notifications/'+id+'/message');
-// var newPostRef = postListRef.push();
-// newPostRef.set(noti);
-       
+
     return
     } else {
        userToken = doc.data().registrationTokens
@@ -287,30 +281,12 @@ var noti={}
     }
   }
 
-  //const  registrationToken = req.body.registrationToken
-
- 
-
-  //   const message = {
-  //     data: {
-  //           "title": apititle,
-  //           "body": apibody,
-  //   },
-  //   tokens: userToken,
-  // }
-
-
-
   const notification_options = {
     priority: "high",
     timeToLive: 60 * 60 * 24
   };
 
-
-
-
   const message = {
-
     android: {
       notification: {
         title: apititle,
@@ -326,9 +302,6 @@ var noti={}
 
     tokens: userToken,
     priority: "high",
-
-
-
   }
 
   if (req.body.booking_id) {
@@ -339,25 +312,11 @@ var noti={}
     console.log(message);
   }
 
-
-
-
-
-  //const options =  notification_options 
-
   admin.messaging().sendMulticast(message)
     .then(async (response) => {
-      // res.status(200).send("Notification sent successfully")
       res.json(response)
 
-
-
-      // const notificationRef = db.collection('notifications').doc(id);
-     
-
 var noti={}
-
-
         if(user_id){
 			   noti = 
         {
@@ -375,38 +334,8 @@ var noti={}
                 "timestamp": Date.now()
 
       }
-			
 		}
-		
 		console.log("noti",noti)
-	  
-	  
-	  
-	  
-      
-//       var postListRef = admin.database().ref('notifications/'+id+'/message');
-// var newPostRef = postListRef.push();
-// newPostRef.set(noti);
- 
-
-// const notificationRef = db.collection("notifications")
-//                 .doc(id)
-//                 .collection("message")
-//         .add(noti);
-      
-//       if (notificationRef) {
-//        return res.status(200).send("Message sent successfully")
-//       } else {
-//          return res.status(200).send("Message faild")
-      
-//       }
-
-
-
-
-
-
-
     })
     .catch(error => {
       console.log(error);
@@ -676,6 +605,96 @@ var noti={}
 
 })
 
+// app.post('/send-notification-to-da-about-a-new-order-that-he-recieved', async (req, res) => {
+
+//   //const id = "jSCZYMamdqeFFMWqm0RhFjxYDA32"
+//   const id = req.body.userId
+//   const user_id = req.body.userId
+//   const daId = req.body.daId
+//   const apititle = req.body.apititle
+//   const apibody = req.body.apibody
+//   const orderID = req.body.orderID
+//   const click_action = req.body.click_action
+//   //const user_id = "jSCZYMamdqeFFMWqm0RhFjxYDA32"
+  
+//   let userToken = []
+
+//   const tokenRef = db.collection("da_agents_main_list_collection")
+//   .doc(daId);
+//   const doc = await tokenRef.get();
+//   if (!doc.exists) {
+//     console.log('No such document!');
+//     return
+//   } else {
+// 	      if (doc.data().notification === 'off') {
+//       console.log('No such document!');
+      
+// var noti={}
+//     if(user_id){
+// 			   noti = 
+//         {
+//           "title": apititle,
+//           "body": apibody,
+//           "orderID": orderID,
+//           "daId": daId,
+// 				  "user_id":user_id,
+//           "timestamp": Date.now()
+//         }
+// 		}else{
+// 			   noti = 
+//         {
+//           "title": apititle, 
+//           "daId": daId,
+//           "body": apibody,
+//           "orderID": orderID,
+//           "timestamp": Date.now()
+//         }
+//       }
+		
+// 		console.log("noti",noti)
+	     
+//     return
+//     } else {
+//        userToken = doc.data().registrationTokens
+// 	    console.log('Document data:', userToken);
+//     }
+//   }
+//   const notification_options = {
+//     priority: "high",
+//     timeToLive: 60 * 60 * 24
+//   };
+//   const message = {
+
+//     android: {
+//       notification: {
+//         title: apititle,
+//         body: apibody,
+//         click_action: click_action,
+//         sound: 'mixkit_residential_burglar_alert_1656.wav'
+//       }
+//     },
+
+//     options: notification_options,
+
+//     data: {},
+
+//     tokens: userToken,
+//     priority: "high",
+//   }
+
+//   message.data.orderID = orderID;
+//   message.data.daId = daId;
+//   admin.messaging().sendMulticast(message)
+//     .then(async (response) => {
+//       res.json(response)
+//     })
+//     .catch(error => {
+//       console.log(error);
+//     });
+
+// })
+
+
 app.post('/send-notification-to-da-about-a-new-order-that-he-recieved', async (req, res) => {
 
   //const id = "jSCZYMamdqeFFMWqm0RhFjxYDA32"
@@ -685,6 +704,7 @@ app.post('/send-notification-to-da-about-a-new-order-that-he-recieved', async (r
   const apititle = req.body.apititle
   const apibody = req.body.apibody
   const orderID = req.body.orderID
+  const timestamp = Date.now()
   const click_action = req.body.click_action
   //const user_id = "jSCZYMamdqeFFMWqm0RhFjxYDA32"
   
@@ -735,15 +755,14 @@ var noti={}
     timeToLive: 60 * 60 * 24
   };
   const message = {
-
-    android: {
-      notification: {
-        title: apititle,
-        body: apibody,
-        click_action: click_action,
-        sound: 'ios_notification'
-      }
-    },
+    // android: {
+    //   notification: {
+    //     title: apititle,
+    //     body: apibody,
+    //     click_action: click_action,
+    //     sound: 'mixkit_residential_burglar_alert_1656.wav'
+    //   }
+    // },
 
     options: notification_options,
 
@@ -755,6 +774,13 @@ var noti={}
 
   message.data.orderID = orderID;
   message.data.daId = daId;
+  message.data.title = apititle;
+  message.data.body = apibody;
+  message.data.daId = daId;
+  message.data.user_id = user_id;
+  message.data.timestamp = "timestamp";
+  message.data.click_action = click_action;
+  
   admin.messaging().sendMulticast(message)
     .then(async (response) => {
       res.json(response)
