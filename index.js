@@ -605,7 +605,7 @@ var noti={}
 
 })
 
-app.post('/send-notification-to-da-about-a-new-order-that-he-recieved', async (req, res) => {
+app.post('/send-notification-to-da-about-a-new-order-that-he-recieved-2', async (req, res) => {
 
   //const id = "jSCZYMamdqeFFMWqm0RhFjxYDA32"
   const id = req.body.userId
@@ -664,13 +664,12 @@ var noti={}
     timeToLive: 60 * 60 * 24
   };
   const message = {
-
     android: {
       notification: {
         title: apititle,
         body: apibody,
         click_action: click_action,
-        sound: 'mixkit_residential_burglar_alert_1656.wav'
+        sound: 'mixkit_residential_burglar_alert_1656'
       }
     },
 
@@ -703,101 +702,101 @@ var noti={}
 })
 
 
-// app.post('/send-notification-to-da-about-a-new-order-that-he-recieved', async (req, res) => {
+app.post('/send-notification-to-da-about-a-new-order-that-he-recieved', async (req, res) => {
 
-//   //const id = "jSCZYMamdqeFFMWqm0RhFjxYDA32"
-//   const id = req.body.userId
-//   const user_id = req.body.userId
-//   const daId = req.body.daId
-//   const apititle = req.body.apititle
-//   const apibody = req.body.apibody
-//   const orderID = req.body.orderID
-//   const timestamp = Date.now()
-//   const click_action = req.body.click_action
-//   //const user_id = "jSCZYMamdqeFFMWqm0RhFjxYDA32"
+  //const id = "jSCZYMamdqeFFMWqm0RhFjxYDA32"
+  const id = req.body.userId
+  const user_id = req.body.userId
+  const daId = req.body.daId
+  const apititle = req.body.apititle
+  const apibody = req.body.apibody
+  const orderID = req.body.orderID
+  const timestamp = Date.now()
+  const click_action = req.body.click_action
+  //const user_id = "jSCZYMamdqeFFMWqm0RhFjxYDA32"
   
-//   let userToken = []
+  let userToken = []
 
-//   const tokenRef = db.collection("da_agents_main_list_collection")
-//   .doc(daId);
-//   const doc = await tokenRef.get();
-//   if (!doc.exists) {
-//     console.log('No such document!');
-//     return
-//   } else {
-// 	      if (doc.data().notification === 'off') {
-//       console.log('No such document!');
+  const tokenRef = db.collection("da_agents_main_list_collection")
+  .doc(daId);
+  const doc = await tokenRef.get();
+  if (!doc.exists) {
+    console.log('No such document!');
+    return
+  } else {
+	      if (doc.data().notification === 'off') {
+      console.log('No such document!');
       
-// var noti={}
-//     if(user_id){
-// 			   noti = 
-//         {
-//           "title": apititle,
-//           "body": apibody,
-//           "orderID": orderID,
-//           "daId": daId,
-// 				  "user_id":user_id,
-//           "timestamp": Date.now()
-//         }
-// 		}else{
-// 			   noti = 
-//         {
-//           "title": apititle, 
-//           "daId": daId,
-//           "body": apibody,
-//           "orderID": orderID,
-//           "timestamp": Date.now()
-//         }
-//       }
+var noti={}
+    if(user_id){
+			   noti = 
+        {
+          "title": apititle,
+          "body": apibody,
+          "orderID": orderID,
+          "daId": daId,
+				  "user_id":user_id,
+          "timestamp": Date.now()
+        }
+		}else{
+			   noti = 
+        {
+          "title": apititle, 
+          "daId": daId,
+          "body": apibody,
+          "orderID": orderID,
+          "timestamp": Date.now()
+        }
+      }
 		
-// 		console.log("noti",noti)
+		console.log("noti",noti)
 	     
-//     return
-//     } else {
-//        userToken = doc.data().registrationTokens
-// 	    console.log('Document data:', userToken);
-//     }
-//   }
-//   const notification_options = {
-//     priority: "high",
-//     timeToLive: 60 * 60 * 24
-//   };
-//   const message = {
-//     // android: {
-//     //   notification: {
-//     //     title: apititle,
-//     //     body: apibody,
-//     //     click_action: click_action,
-//     //     sound: 'mixkit_residential_burglar_alert_1656.wav'
-//     //   }
-//     // },
+    return
+    } else {
+       userToken = doc.data().registrationTokens
+	    console.log('Document data:', userToken);
+    }
+  }
+  const notification_options = {
+    priority: "high",
+    timeToLive: 60 * 60 * 24
+  };
+  const message = {
+    // android: {
+    //   notification: {
+    //     title: apititle,
+    //     body: apibody,
+    //     click_action: click_action,
+    //     sound: 'mixkit_residential_burglar_alert_1656.wav'
+    //   }
+    // },
 
-//     options: notification_options,
+    options: notification_options,
 
-//     data: {},
+    data: {},
 
-//     tokens: userToken,
-//     priority: "high",
-//   }
+    tokens: userToken,
+    priority: "high",
+  }
 
-//   message.data.orderID = orderID;
-//   message.data.daId = daId;
-//   message.data.title = apititle;
-//   message.data.body = apibody;
-//   message.data.daId = daId;
-//   message.data.user_id = user_id;
-//   message.data.timestamp = "timestamp";
-//   message.data.click_action = click_action;
+  message.data.orderID = orderID;
+  message.data.daId = daId;
+  message.data.title = apititle;
+  message.data.body = apibody;
+  message.data.daId = daId;
+  message.data.user_id = user_id;
+  message.data.timestamp = "timestamp";
+  message.data.click_action = click_action;
   
-//   admin.messaging().sendMulticast(message)
-//     .then(async (response) => {
-//       res.json(response)
-//     })
-//     .catch(error => {
-//       console.log(error);
-//     });
+  admin.messaging().sendMulticast(message)
+    .then(async (response) => {
+      res.json(response)
+    })
+    .catch(error => {
+      console.log(error);
+    });
 
-// })
+})
 
 
 app.post('/delete-firebase-storage-of-a-specific-shop-all-delete-images', async (req, res) => {
