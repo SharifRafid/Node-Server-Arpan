@@ -8,7 +8,7 @@ const db = admin.firestore()
 const app = express()
 app.use(bodyparser.json())
 
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 8005
 
 const notification_options = {
   priority: "high",
@@ -595,6 +595,7 @@ var noti={}
   }
 
   message.data.orderID = orderID;
+  message.data.user_id = user_id;
   admin.messaging().sendMulticast(message)
     .then(async (response) => {
       res.json(response)
