@@ -529,7 +529,7 @@ app.post('/send-notification-to-admin-app-about-a-new-order-that-he-recieved', a
   const apititle = req.body.apititle
   const apibody = req.body.apibody
   const orderID = req.body.orderID
-  const click_action = ".ui.home.HomeActivity"
+  const click_action = ".ui.home.HomeActivityMain"
   
   let userToken = []
 
