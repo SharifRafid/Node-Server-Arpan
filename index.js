@@ -2,7 +2,6 @@
 const express = require("express")
 const bodyparser = require("body-parser")
 const { admin } = require('./firebase-config')
-const functions = require('firebase-functions')
 const db = admin.firestore()
 
 const app = express()
