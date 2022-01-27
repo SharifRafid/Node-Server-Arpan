@@ -208,7 +208,8 @@ router.post('/send-notification-to-da-about-a-new-order-that-he-recieved-2', asy
 
         options: notification_options,
 
-        data: {},
+        data: {
+        },
 
         tokens: userToken,
         priority: "high",
@@ -267,6 +268,7 @@ router.post('/send-notification-to-da-about-a-new-order-that-he-recieved', async
         //     sound: 'mixkit_residential_burglar_alert_1656.wav'
         //   }
         // },
+        data: {}
     }
     message.priority = "high";
     message.options = notification_options;
