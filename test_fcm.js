@@ -1,7 +1,7 @@
 const { admin } = require('./firebase-config-test')
 
 async function sendNotification() {
-  let userToken = ['eId-ibExRdOo5hgLlzjgfS:APA91bEuwp0EDqnPoK1SgxqOjnSEF9bL29_bHII1toQi5yHYTjl0W-7ewlsXiO-c-5DEBUk878e_pXqHcQDub_FW8EGG6CHlmEaztp9L1rwHV3JbREj-40ymqqQ-tRsCMBQpFcwwSaPO']
+  let userToken = ['d_KSYobYQ-aQW_ZGlXwLQr:APA91bGfw0DP8B2M2g9fH9PVfl8XQrOJ_-p2QBz4n6zfHXuWajSp9xLcJSWmw7FOj-Edaet79dP-uG9QTJRb_1tgdDaFPsfE_kbIVRPm6pF5eVei55inH1rS42uAz1aZ2WdPYCJVuQLr']
 
   const notification_options = {
     priority: "high",

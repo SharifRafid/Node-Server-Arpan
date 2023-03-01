@@ -1,11 +1,10 @@
 
 var admin = require("firebase-admin");
 
-var serviceAccount = require("./test-e2ce9-firebase-adminsdk-yenke-e8f9f799db.json");
+var serviceAccount = require("./test-18b5f-firebase-adminsdk-ynwz5-570c37f7b9.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://test-e2ce9-default-rtdb.firebaseio.com"
 });
 
 module.exports.admin = admin
